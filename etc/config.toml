@@ -1,0 +1,4 @@
+rust_log = "falcon=debug"
+listen_addr = "127.0.0.1:1988"
+n9e_server = "http://server.n9e.com"
+allow_headers = ["Monitor-Company-Abbr"]
