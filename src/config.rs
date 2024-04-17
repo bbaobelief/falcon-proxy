@@ -7,12 +7,32 @@ pub static APP_CONFIG: OnceLock<RwLock<AppConfig>> = OnceLock::new();
 
 #[derive(Deserialize, Serialize, Clone, Debug)]
 pub struct AppConfig {
+    #[serde(default = "default_rust_log")]
     pub rust_log: String,
+    #[serde(default = "default_listen_addr")]
     pub listen_addr: String,
+    #[serde(default = "default_n9e_server")]
     pub n9e_server: String,
     pub falcon_agent_addr: Option<String>,
     pub monitor_company_abbr: Option<String>,
+    #[serde(default = "default_allow_headers")]
     pub allow_headers: Vec<String>,
+}
+
+fn default_rust_log() -> String {
+    "falcon=debug".to_string()
+}
+
+fn default_listen_addr() -> String {
+    "127.0.0.1:1988".to_string()
+}
+
+fn default_n9e_server() -> String {
+    "http://server.n9e.com".to_string()
+}
+
+fn default_allow_headers() -> Vec<String> {
+    vec!["Monitor-Company-Abbr".to_string()]
 }
 
 impl fmt::Display for AppConfig {
