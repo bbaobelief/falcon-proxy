@@ -47,9 +47,7 @@ async fn main() {
         .route("/prometheus/v1/write", post(openfalcon_push))
         .with_state(client);
 
-    let listener = tokio::net::TcpListener::bind(listen_addr)
-        .await
-        .unwrap();
+    let listener = tokio::net::TcpListener::bind(listen_addr).await.unwrap();
     tracing::info!("listening on {}", listener.local_addr().unwrap());
     axum::serve(listener, app).await.unwrap();
 }
